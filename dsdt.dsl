@@ -5,53 +5,26 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of dsdt.dat, Fri Apr 13 16:42:15 2018
+ * Disassembly of dsdt.aml, Fri Apr 13 16:50:42 2018
  *
  * Original Table Header:
  *     Signature        "DSDT"
- *     Length           0x0000F34D (62285)
+ *     Length           0x0000F3A2 (62370)
  *     Revision         0x02
- *     Checksum         0xDB
+ *     Checksum         0xF3
  *     OEM ID           "ALASKA"
  *     OEM Table ID     "A M I "
  *     OEM Revision     0x00000003 (3)
- *     Compiler ID      "AMI "
- *     Compiler Version 0x0100000D (16777229)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20160831 (538314801)
  */
 DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 {
-    /*
-     * iASL Warning: There were 2 external control methods found during
-     * disassembly, but only 0 were resolved (2 unresolved). Additional
-     * ACPI tables may be required to properly disassemble the code. This
-     * resulting disassembler output file may not compile because the
-     * disassembler did not know how many arguments to assign to the
-     * unresolved methods. Note: SSDTs can be dynamically loaded at
-     * runtime and may or may not be available via the host OS.
-     *
-     * To specify the tables needed to resolve external control method
-     * references, the -e option can be used to specify the filenames.
-     * Example iASL invocations:
-     *     iasl -e ssdt1.aml ssdt2.aml ssdt3.aml -d dsdt.aml
-     *     iasl -e dsdt.aml ssdt2.aml -d ssdt1.aml
-     *     iasl -e ssdt*.aml -d dsdt.aml
-     *
-     * In addition, the -fe option can be used to specify a file containing
-     * control method external declarations with the associated method
-     * argument counts. Each line of the file must be of the form:
-     *     External (<method pathname>, MethodObj, <argument count>)
-     * Invocation:
-     *     iasl -fe refs.txt -d dsdt.aml
-     *
-     * The following methods were unresolved and many not compile properly
-     * because the disassembler had to guess at the number of arguments
-     * required for each:
-     */
     External (_PR_.CPU0._PPC, UnknownObj)
-    External (_SB_.PCI0.LPCB.TPM_.PTS_, MethodObj)    // Warning: Unknown method, guessing 1 arguments
+    External (_SB_.PCI0.LPCB.TPM_.PTS_, MethodObj)    // 1 Arguments
     External (CFGD, UnknownObj)
     External (DPTF, UnknownObj)
-    External (NDN3, MethodObj)    // Warning: Unknown method, guessing 1 arguments
+    External (NDN3, MethodObj)    // 1 Arguments
     External (PDC0, UnknownObj)
     External (PDC1, UnknownObj)
     External (PDC2, UnknownObj)
@@ -1079,7 +1052,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             0xFFFFFFFF, 
                             0xFFFFFFFF
                         })
-                        TMP1 [Zero] = (0x00010000 | DID1)
+                        TMP1 [Zero] = (0x00010000 | DID1) /* \DID1 */
                         If (SOCS < 0x02)
                         {
                             TMP1 [One] = 0x00020F39
@@ -1100,8 +1073,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             0xFFFFFFFF, 
                             0xFFFFFFFF
                         })
-                        TMP2 [Zero] = (0x00010000 | DID1)
-                        TMP2 [One] = (0x00010000 | DID2)
+                        TMP2 [Zero] = (0x00010000 | DID1) /* \DID1 */
+                        TMP2 [One] = (0x00010000 | DID2) /* \DID2 */
                         If (SOCS < 0x02)
                         {
                             TMP2 [0x02] = 0x00020F39
@@ -1123,9 +1096,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             0xFFFFFFFF, 
                             0xFFFFFFFF
                         })
-                        TMP3 [Zero] = (0x00010000 | DID1)
-                        TMP3 [One] = (0x00010000 | DID2)
-                        TMP3 [0x02] = (0x00010000 | DID3)
+                        TMP3 [Zero] = (0x00010000 | DID1) /* \DID1 */
+                        TMP3 [One] = (0x00010000 | DID2) /* \DID2 */
+                        TMP3 [0x02] = (0x00010000 | DID3) /* \DID3 */
                         If (SOCS < 0x02)
                         {
                             TMP3 [0x03] = 0x00020F39
@@ -1148,10 +1121,10 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             0xFFFFFFFF, 
                             0xFFFFFFFF
                         })
-                        TMP4 [Zero] = (0x00010000 | DID1)
-                        TMP4 [One] = (0x00010000 | DID2)
-                        TMP4 [0x02] = (0x00010000 | DID3)
-                        TMP4 [0x03] = (0x00010000 | DID4)
+                        TMP4 [Zero] = (0x00010000 | DID1) /* \DID1 */
+                        TMP4 [One] = (0x00010000 | DID2) /* \DID2 */
+                        TMP4 [0x02] = (0x00010000 | DID3) /* \DID3 */
+                        TMP4 [0x03] = (0x00010000 | DID4) /* \DID4 */
                         If (SOCS < 0x02)
                         {
                             TMP4 [0x04] = 0x00020F39
@@ -1175,11 +1148,11 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             0xFFFFFFFF, 
                             0xFFFFFFFF
                         })
-                        TMP5 [Zero] = (0x00010000 | DID1)
-                        TMP5 [One] = (0x00010000 | DID2)
-                        TMP5 [0x02] = (0x00010000 | DID3)
-                        TMP5 [0x03] = (0x00010000 | DID4)
-                        TMP5 [0x04] = (0x00010000 | DID5)
+                        TMP5 [Zero] = (0x00010000 | DID1) /* \DID1 */
+                        TMP5 [One] = (0x00010000 | DID2) /* \DID2 */
+                        TMP5 [0x02] = (0x00010000 | DID3) /* \DID3 */
+                        TMP5 [0x03] = (0x00010000 | DID4) /* \DID4 */
+                        TMP5 [0x04] = (0x00010000 | DID5) /* \DID5 */
                         If (SOCS < 0x02)
                         {
                             TMP5 [0x05] = 0x00020F39
@@ -2090,7 +2063,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         {
                             PARM &= 0xEFFF0000
                             PARM &= (DerefOf (DBTB [IBTT]) << 0x10)
-                            PARM |= IBTT /* \_SB_.PCI0.GFX0.PARM */
+                            PARM |= IBTT /* \IBTT */
                             GESF = Zero
                             Return (SUCC) /* \_SB_.PCI0.GFX0.SUCC */
                         }
@@ -2123,7 +2096,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             PARM |= (GMFN << One)
                             PARM |= 0x1800
                             PARM |= (IDMS << 0x11)
-                            PARM |= (DerefOf (CDCT [DCFE]) << 0x15) /* \_SB_.PCI0.GFX0.PARM */
+                            PARM |= (DerefOf (CDCT [DCFE]) << 0x15)
                             GESF = One
                             Return (SUCC) /* \_SB_.PCI0.GFX0.SUCC */
                         }
@@ -5072,7 +5045,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                             PLD_CardCageNumber     = 0x0,
                             PLD_Reference          = 0x0,
                             PLD_Rotation           = 0x0,
-                            PLD_Order              = 0x0)
+                            PLD_Order              = 0x0,
+                            PLD_VerticalOffset     = 0x0,
+                            PLD_HorizontalOffset   = 0x0)
 
                     })
                     Device (PR11)
@@ -5099,7 +5074,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_Dock               = 0x0,
                                 PLD_Lid                = 0x0,
                                 PLD_Panel              = "FRONT",
-                                PLD_VerticalPosition   = "",
+                                PLD_VerticalPosition   = "UPPER",
                                 PLD_HorizontalPosition = "LEFT",
                                 PLD_Shape              = "UNKNOWN",
                                 PLD_GroupOrientation   = 0x0,
@@ -5112,7 +5087,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                     }
@@ -5141,7 +5118,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_Dock               = 0x0,
                                 PLD_Lid                = 0x0,
                                 PLD_Panel              = "FRONT",
-                                PLD_VerticalPosition   = "",
+                                PLD_VerticalPosition   = "UPPER",
                                 PLD_HorizontalPosition = "CENTER",
                                 PLD_Shape              = "UNKNOWN",
                                 PLD_GroupOrientation   = 0x0,
@@ -5154,7 +5131,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                     }
@@ -5183,7 +5162,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_Dock               = 0x0,
                                 PLD_Lid                = 0x0,
                                 PLD_Panel              = "FRONT",
-                                PLD_VerticalPosition   = "",
+                                PLD_VerticalPosition   = "UPPER",
                                 PLD_HorizontalPosition = "CENTER",
                                 PLD_Shape              = "UNKNOWN",
                                 PLD_GroupOrientation   = 0x0,
@@ -5196,7 +5175,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                     }
@@ -5225,7 +5206,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_Dock               = 0x0,
                                 PLD_Lid                = 0x0,
                                 PLD_Panel              = "FRONT",
-                                PLD_VerticalPosition   = "",
+                                PLD_VerticalPosition   = "UPPER",
                                 PLD_HorizontalPosition = "RIGHT",
                                 PLD_Shape              = "UNKNOWN",
                                 PLD_GroupOrientation   = 0x0,
@@ -5238,7 +5219,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
@@ -5327,7 +5310,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
@@ -5416,7 +5401,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
@@ -5505,7 +5492,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
@@ -5594,7 +5583,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                                 PLD_CardCageNumber     = 0x0,
                                 PLD_Reference          = 0x0,
                                 PLD_Rotation           = 0x0,
-                                PLD_Order              = 0x0)
+                                PLD_Order              = 0x0,
+                                PLD_VerticalOffset     = 0x0,
+                                PLD_HorizontalOffset   = 0x0)
 
                         })
                     }

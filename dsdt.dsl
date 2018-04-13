@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20160831 (538314801)
  */
-DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
+DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
 {
     External (_PR_.CPU0._PPC, UnknownObj)
     External (_SB_.PCI0.LPCB.TPM_.PTS_, MethodObj)    // 1 Arguments

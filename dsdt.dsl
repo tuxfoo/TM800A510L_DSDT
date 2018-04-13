@@ -9809,17 +9809,21 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                             AddressingMode7Bit, "\\_SB.I2C2",
                             0x00, ResourceConsumer, , Exclusive,
                             )
-                        GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionInputOnly,
+                        Interrupt (ResourceConsumer, Edge, ActiveHigh, Exclusive, ,, )
+							{
+								0x000000DC,
+							}
+                        GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0x0000,
                             "\\_SB.GPO2", 0x00, ResourceConsumer, ,
                             )
                             {   // Pin list
-                                0x0044
+                                0x0003
                             }
                         GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
                             "\\_SB.GPO1", 0x00, ResourceConsumer, ,
                             )
                             {   // Pin list
-                                0x001A
+                                0x0009
                             }
                     })
                     Return (RBUF) /* \_SB_.I2C2.TCS0._CRS.RBUF */
@@ -11070,17 +11074,21 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                             AddressingMode7Bit, "\\_SB.I2C4",
                             0x00, ResourceConsumer, , Exclusive,
                             )
-                        GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionInputOnly,
+                        Interrupt (ResourceConsumer, Edge, ActiveHigh, Exclusive, ,, )
+							{
+								0x000000DC,
+							}
+                        GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0x0000,
                             "\\_SB.GPO2", 0x00, ResourceConsumer, ,
                             )
                             {   // Pin list
-                                0x0044
+                                0x0003
                             }
                         GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
                             "\\_SB.GPO1", 0x00, ResourceConsumer, ,
                             )
                             {   // Pin list
-                                0x001A
+                                0x0009
                             }
                     })
                     Return (RBUF) /* \_SB_.I2C4.TCS0._CRS.RBUF */

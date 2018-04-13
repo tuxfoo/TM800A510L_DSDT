@@ -5,7 +5,7 @@
  * 
  * Disassembling to symbolic ASL+ operators
  *
- * Disassembly of dsdt.aml, Fri Apr 13 16:50:42 2018
+ * Disassembly of dsdt.aml, Thu Apr 12 11:39:20 2018
  *
  * Original Table Header:
  *     Signature        "DSDT"
@@ -999,7 +999,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     I2C4, 
                     PEPD
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -1017,7 +1017,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     DSEN = (Arg0 & 0x07)
                 }
 
-                Method (_DOD, 0, NotSerialized)  // _DOD: Display Output Devices
+                Method (_DOD, 0, Serialized)  // _DOD: Display Output Devices
                 {
                     NDID = Zero
                     If (DIDL != Zero)
@@ -3703,7 +3703,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -3739,7 +3739,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -3759,7 +3759,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
 
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
-                    Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                    Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                     If (Arg0 == ToUUID ("886a3f26-600c-4401-b7b1-01e9c2e7e77e"))
                     {
                         Return ("BLUET")
@@ -3779,22 +3779,22 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     {
                         While (One)
                         {
-                            _T_0 = ToInteger (Arg1)
-                            If (_T_0 == 0x08)
+                            T_0 = ToInteger (Arg1)
+                            If (T_0 == 0x08)
                             {
                                 Return (Buffer (0x05)
                                 {
                                      0x00, 0x00, 0x00, 0x00, 0x01                     /* ..... */
                                 })
                             }
-                            ElseIf (_T_0 == 0x10)
+                            ElseIf (T_0 == 0x10)
                             {
                                 Return (Buffer (0x05)
                                 {
                                      0x06, 0x02, 0x00, 0x0E, 0x10                     /* ..... */
                                 })
                             }
-                            ElseIf (_T_0 == 0x30)
+                            ElseIf (T_0 == 0x30)
                             {
                                 Return (Buffer (0x05)
                                 {
@@ -3830,7 +3830,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Return (Zero)
             }
 
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -3873,7 +3873,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Return (Zero)
             }
 
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -3911,7 +3911,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Return (Zero)
             }
 
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -4225,6 +4225,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 PDBM &= 0xFFFFFFFFFFFFFFFD
                 MEMB = Local2
                 PDBM = Local1
+                
+                Return(Zero)
             }
 
             Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -4298,6 +4300,8 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 PDBM &= 0xFFFFFFFFFFFFFFFD
                 MEMB = Local2
                 PDBM = Local1
+                
+                Return(Zero)
             }
 
             Method (_DSW, 3, NotSerialized)  // _DSW: Device Sleep Wake
@@ -5226,13 +5230,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8"))
                             {
                                 While (One)
                                 {
-                                    _T_0 = ToInteger (Arg2)
-                                    If (_T_0 == Zero)
+                                    T_0 = ToInteger (Arg2)
+                                    If (T_0 == Zero)
                                     {
                                         If (Arg1 == One)
                                         {
@@ -5249,7 +5253,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             })
                                         }
                                     }
-                                    ElseIf (_T_0 == One)
+                                    ElseIf (T_0 == One)
                                     {
                                         If (SDGV == 0xFF)
                                         {
@@ -5260,7 +5264,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             Return (One)
                                         }
                                     }
-                                    ElseIf (_T_0 == 0x02)
+                                    ElseIf (T_0 == 0x02)
                                     {
                                         Return (SDGV) /* \SDGV */
                                     }
@@ -5317,13 +5321,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8"))
                             {
                                 While (One)
                                 {
-                                    _T_0 = ToInteger (Arg2)
-                                    If (_T_0 == Zero)
+                                    T_0 = ToInteger (Arg2)
+                                    If (T_0 == Zero)
                                     {
                                         If (Arg1 == One)
                                         {
@@ -5340,7 +5344,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             })
                                         }
                                     }
-                                    ElseIf (_T_0 == One)
+                                    ElseIf (T_0 == One)
                                     {
                                         If (SDGV == 0xFF)
                                         {
@@ -5351,7 +5355,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             Return (One)
                                         }
                                     }
-                                    ElseIf (_T_0 == 0x02)
+                                    ElseIf (T_0 == 0x02)
                                     {
                                         Return (SDGV) /* \SDGV */
                                     }
@@ -5408,13 +5412,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8"))
                             {
                                 While (One)
                                 {
-                                    _T_0 = ToInteger (Arg2)
-                                    If (_T_0 == Zero)
+                                    T_0 = ToInteger (Arg2)
+                                    If (T_0 == Zero)
                                     {
                                         If (Arg1 == One)
                                         {
@@ -5431,7 +5435,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             })
                                         }
                                     }
-                                    ElseIf (_T_0 == One)
+                                    ElseIf (T_0 == One)
                                     {
                                         If (SDGV == 0xFF)
                                         {
@@ -5442,7 +5446,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             Return (One)
                                         }
                                     }
-                                    ElseIf (_T_0 == 0x02)
+                                    ElseIf (T_0 == 0x02)
                                     {
                                         Return (SDGV) /* \SDGV */
                                     }
@@ -5499,13 +5503,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                            Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                             If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8"))
                             {
                                 While (One)
                                 {
-                                    _T_0 = ToInteger (Arg2)
-                                    If (_T_0 == Zero)
+                                    T_0 = ToInteger (Arg2)
+                                    If (T_0 == Zero)
                                     {
                                         If (Arg1 == One)
                                         {
@@ -5522,7 +5526,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             })
                                         }
                                     }
-                                    ElseIf (_T_0 == One)
+                                    ElseIf (T_0 == One)
                                     {
                                         If (SDGV == 0xFF)
                                         {
@@ -5533,7 +5537,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                             Return (One)
                                         }
                                     }
-                                    ElseIf (_T_0 == 0x02)
+                                    ElseIf (T_0 == 0x02)
                                     {
                                         Return (SDGV) /* \SDGV */
                                     }
@@ -6048,7 +6052,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 }
             }
 
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -6065,7 +6069,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Return (0x0F)
             }
 
-            Method (_AEI, 0, NotSerialized)  // _AEI: ACPI Event Interrupts
+            Method (_AEI, 0, Serialized)  // _AEI: ACPI Event Interrupts
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -6163,7 +6167,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             Name (_CID, "INT33FC" /* Intel Baytrail GPIO Controller */)  // _CID: Compatible ID
             Name (_DDN, "ValleyView General Purpose Input/Output (GPIO) controller")  // _DDN: DOS Device Name
             Name (_UID, One)  // _UID: Unique ID
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -6242,7 +6246,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             Name (_CID, "INT33FC" /* Intel Baytrail GPIO Controller */)  // _CID: Compatible ID
             Name (_DDN, "ValleyView GPNCORE controller")  // _DDN: DOS Device Name
             Name (_UID, 0x02)  // _UID: Unique ID
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -6303,7 +6307,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             Name (_CID, "INT33FC" /* Intel Baytrail GPIO Controller */)  // _CID: Compatible ID
             Name (_DDN, "ValleyView GPSUS controller")  // _DDN: DOS Device Name
             Name (_UID, 0x03)  // _UID: Unique ID
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -6324,7 +6328,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Return (0x0F)
             }
 
-            Method (_AEI, 0, NotSerialized)  // _AEI: ACPI Event Interrupts
+            Method (_AEI, 0, Serialized)  // _AEI: ACPI Event Interrupts
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -8545,7 +8549,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 })
                 Name (_S4W, 0x02)  // _S4W: S4 Device Wake State
                 Name (_S0W, 0x02)  // _S0W: S0 Device Wake State
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -8594,7 +8598,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (NAM, Buffer (0x0F)
                     {
@@ -8645,7 +8649,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 })
                 Name (_S4W, 0x02)  // _S4W: S4 Device Wake State
                 Name (_S0W, 0x02)  // _S0W: S0 Device Wake State
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -9274,7 +9278,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -9312,7 +9316,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -9452,7 +9456,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -9543,7 +9547,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             {
                 Name (_HID, "AUTH2750" /* AuthenTec AES2750 */)  // _HID: Hardware ID
                 Name (_DDN, "AuthenTec AES2750")  // _DDN: DOS Device Name
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (UBUF, ResourceTemplate ()
                     {
@@ -9801,7 +9805,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Sleep (0x78)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -9831,20 +9835,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
 
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
-                    Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                    Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                    Name (T_, Zero)  // T_x: Emitted by ASL Compiler
+                    Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                     Debug = "Method _DSM begin"
                     If (Arg0 == ToUUID ("3cdff6f7-4267-4555-ad05-b30a3d8938de") /* HID I2C Device */)
                     {
                         While (One)
                         {
-                            _T_0 = ToInteger (Arg2)
-                            If (_T_0 == Zero)
+                            T_0 = ToInteger (Arg2)
+                            If (T_0 == Zero)
                             {
                                 While (One)
                                 {
-                                    _T_1 = ToInteger (Arg1)
-                                    If (_T_1 == One)
+                                    T_ = ToInteger (Arg1)
+                                    If (T_ == One)
                                     {
                                         Debug = "Method _DSM Function Query"
                                         Return (Buffer (One)
@@ -9863,7 +9867,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                                     Break
                                 }
                             }
-                            ElseIf (_T_0 == One)
+                            ElseIf (T_0 == One)
                             {
                                 Debug = "Method _DSM Function HID"
                                 Return (Zero)
@@ -9895,7 +9899,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
             }
-
+            
             Device (RTEK)
             {
                 Name (_ADR, Zero)  // _ADR: Address
@@ -9903,7 +9907,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 Name (_CID, "10EC5640" /* Realtek I2S Audio Codec */)  // _CID: Compatible ID
                 Name (_DDN, "RTEK Codec Controller ")  // _DDN: DOS Device Name
                 Name (_UID, One)  // _UID: Unique ID
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -9921,7 +9925,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (SBUF) /* \_SB_.I2C2.RTEK._CRS.SBUF */
                 }
 
-                Method (_STA, 0, NotSerialized)  // _STA: Status
+                Method (_STA, 0, Serialized)  // _STA: Status
                 {
                     Return (0x0F)
                 }
@@ -9961,7 +9965,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     0x14, 
                     0xB3
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -10021,7 +10025,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -10184,7 +10188,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -10370,7 +10374,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -10517,7 +10521,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -10711,7 +10715,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10748,7 +10752,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (0x0F)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10784,7 +10788,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10826,7 +10830,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10862,7 +10866,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     }
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10891,7 +10895,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -10938,7 +10942,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -11025,7 +11029,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 PSAT,   32
             }
 
-            Device (TCS0)
+             Device (TCS0)
             {
                 Name (_ADR, Zero)  // _ADR: Address
                 Name (_HID, "GDIX1001")  // _HID: Hardware ID
@@ -11066,7 +11070,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Sleep (0x78)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
@@ -11075,9 +11079,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                             0x00, ResourceConsumer, , Exclusive,
                             )
                         Interrupt (ResourceConsumer, Edge, ActiveHigh, Exclusive, ,, )
-							{
-								0x000000DC,
-							}
+                        {
+                            0x000000DC,
+						}
                         GpioInt (Edge, ActiveLow, Exclusive, PullNone, 0x0000,
                             "\\_SB.GPO2", 0x00, ResourceConsumer, ,
                             )
@@ -11092,62 +11096,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                             }
                     })
                     Return (RBUF) /* \_SB_.I2C4.TCS0._CRS.RBUF */
-                }
-
-                Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
-                {
-                    Name (_T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                    Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                    Debug = "Method _DSM begin"
-                    If (Arg0 == ToUUID ("3cdff6f7-4267-4555-ad05-b30a3d8938de") /* HID I2C Device */)
-                    {
-                        While (One)
-                        {
-                            _T_0 = ToInteger (Arg2)
-                            If (_T_0 == Zero)
-                            {
-                                While (One)
-                                {
-                                    _T_1 = ToInteger (Arg1)
-                                    If (_T_1 == One)
-                                    {
-                                        Debug = "Method _DSM Function Query"
-                                        Return (Buffer (One)
-                                        {
-                                             0x03                                             /* . */
-                                        })
-                                    }
-                                    Else
-                                    {
-                                        Return (Buffer (One)
-                                        {
-                                             0x00                                             /* . */
-                                        })
-                                    }
-
-                                    Break
-                                }
-                            }
-                            ElseIf (_T_0 == One)
-                            {
-                                Debug = "Method _DSM Function HID"
-                                Return (Zero)
-                            }
-                            Else
-                            {
-                                Return (Zero)
-                            }
-
-                            Break
-                        }
-                    }
-                    Else
-                    {
-                        Return (Buffer (One)
-                        {
-                             0x00                                             /* . */
-                        })
-                    }
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -11300,7 +11248,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 {
                     I2C5
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -11324,7 +11272,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (SBUF) /* \_SB_.I2C5.PMI1._CRS.SBUF */
                 }
 
-                Method (_STA, 0, NotSerialized)  // _STA: Status
+                Method (_STA, 0, Serialized)  // _STA: Status
                 {
                     If (PMEN == Zero)
                     {
@@ -11747,7 +11695,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 {
                     I2C5
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -12196,7 +12144,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 {
                     I2C5
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -12249,7 +12197,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 {
                     I2C5
                 })
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -12906,7 +12854,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                     Return (Zero)
                 }
 
-                Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+                Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
                 {
                     Name (SBUF, ResourceTemplate ()
                     {
@@ -13268,7 +13216,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
                 I2C5, 
                 ^I2C5.PMI1
             })
-            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
                 Name (RBUF, ResourceTemplate ()
                 {
@@ -13502,20 +13450,20 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
 
             Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
-                Name (_T_0, Zero)  // _T_x: Emitted by ASL Compiler
+                Name (T_0, Zero)  // T_x: Emitted by ASL Compiler
                 If (Arg0 == ToUUID ("dfbcf3c5-e7a5-44e6-9c1f-29c76f6e059c") /* Power Button Device */)
                 {
                     While (One)
                     {
-                        _T_0 = ToInteger (Arg2)
-                        If (_T_0 == Zero)
+                        T_0 = ToInteger (Arg2)
+                        If (T_0 == Zero)
                         {
                             Return (Buffer (One)
                             {
                                  0x03                                             /* . */
                             })
                         }
-                        ElseIf (_T_0 == One)
+                        ElseIf (T_0 == One)
                         {
                             Return (0x07)
                         }
@@ -13654,7 +13602,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             Return (Zero)
         }
 
-        Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+        Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
         {
             Name (UBUF, ResourceTemplate ()
             {
@@ -15048,7 +14996,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x00000004)
             }
 
             Name (CHTP, Zero)
-            Method (SBTP, 0, NotSerialized)
+            Method (SBTP, 0, Serialized)
             {
                 ADBG ("SBTP")
                 ADBG ("XP00")
